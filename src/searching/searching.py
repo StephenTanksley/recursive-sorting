@@ -6,25 +6,36 @@ def binary_search(arr, target, start, end):
         to determine which half of the array to discard before trying again.
     P - Will require a base case where the length of the array is 0, a case where 
         the mid-point matches the target, a recursive case. If we find the target, we will return the index of the array where we found it. Else, we return -1.
-    E - Write base case first
-    R
+    E - Write base case first, then consider recursive cases. Base cases involve 
+    R - Get it working first, then look for ways to optimize.
     """
 
+    # define mid point at the start of the algorithm.
     mid = (start + end) // 2
 
-    # base case 1 - length of array is 0
-    if len(arr) == 0:
+    if start <= end:
+
+        # base case 1 - length of array is 0
+        if len(arr) == 0:
+            return -1
+
+        # base case 2 - we find what we're looking for.
+        #   if the array with an index in the middle is equal to the target,
+        #   return index of the item to show its location.
+        if arr[mid] == target:
+            return arr.index(arr[mid])
+
+        # recursive cases
+        # target is less than the midpoint.
+        if arr[mid] > target:
+            return binary_search(arr, target, start, mid - 1)
+
+        # target is greater than the midpoint.
+        if arr[mid] < target:
+            return binary_search(arr, target, mid + 1, end)
+    else:
         return -1
 
-    # base case 2 - we find what we're looking for.
-    #   if the array with an index in the middle is equal to the target,
-    #   we return 1 to indicate we found what we're looking for.
-    if arr[mid] == target:
-        return 1
-
-    if arr[mid] > target:
-
-    pass
 
 # STRETCH: implement an order-agnostic binary search
 # This version of binary search should correctly find
